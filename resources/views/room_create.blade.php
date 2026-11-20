@@ -26,7 +26,11 @@
 @enderror
 
 <label for="image">Картинка</label>
-<input type="file" name="image" id="image">
+<div style="display: flex; align-items: center; gap: 10px;">
+    <input type="text" id="file-name" value="" readonly placeholder="Нет файла" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; flex: 1; color: #999;">
+    <input type="file" name="image" id="image" onchange="document.getElementById('file-name').value = this.files.length ? this.files[0].name : ''; document.getElementById('file-name').style.color = this.files.length ? '#333' : '#999';" style="display: none;">
+    <label for="image" style="padding: 8px 15px; background: #4a90d9; color: #fff; border-radius: 4px; cursor: pointer; font-size: 13px;">Выбрать файл</label>
+</div>
 @error('image')
 <div class="error-message">{{ $message }}</div>
 @enderror

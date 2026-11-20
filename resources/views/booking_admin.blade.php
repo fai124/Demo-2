@@ -28,8 +28,11 @@
 <div class="booking-card">
 <div class="booking-info">
 <p><strong>Пользователь:</strong> {{ $booking->user->FIO }}</p>
-<p><strong>Зал:</strong> @if ( Str::contains($booking->room->name, 'удален') ) зал удален @else {{ $booking->room->name }} @endif</p>
-<p><strong>Дата:</strong> {{ $booking->date }}</p>
+@if ( $booking->room && $booking->room->image && !Str::contains($booking->room->name, 'удален') )
+<img src="{{ asset('storage/rooms/' . $booking->room->image) }}" alt="{{ $booking->room->name }}" class="room-image">
+@endif
+<p><strong>Зал:</strong> @if ( $booking->room && Str::contains($booking->room->name, 'удален') ) зал удален @elseif ( $booking->room ) {{ $booking->room->name }} @endif</p>
+<p><strong>Дата:</strong> {{ $booking->date->format('d.m.Y') }}</p>
 <p><strong>Оплата:</strong> {{ $booking->payment === 'cash' ? 'Очный платёж' : 'СБП' }}</p>
 <p><strong>Статус:</strong>
 @if ( $booking->status == 'new' )

@@ -23,6 +23,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name("dashboard
 Route::get('/room/create', [RoomController::class, 'room_add'])->name("room.create")->middleware("auth");
 Route::post('/room/store', [RoomController::class, 'room_addform'])->name("room.store")->middleware("auth");
 Route::delete('/room/{room}', [RoomController::class, 'room_delete'])->name("room.delete")->middleware("auth");
+Route::get('/room/{room}/edit', [RoomController::class, 'room_edit'])->name("room.edit")->middleware("auth");
+Route::post('/room/{room}', [RoomController::class, 'room_editform'])->name("room.update")->middleware("auth");
 
 Route::get('/booking/create', [BookingController::class, 'booking_add'])->name("booking.create")->middleware("auth");
 Route::get('/booking/room/{id}', [BookingController::class, 'booking_room'])->name("booking.room")->middleware("auth");

@@ -33,7 +33,9 @@
             @auth
             <h2>Добро пожаловать, {{ Auth::user()->FIO }}!</h2>
 
+            @if ( Auth::user()->role !== 'admin' )
             <a href="{{ Route('booking.my') }}" class="btn-create">Мои заявки</a>
+            @endif
 
             @if ( Auth::user()->role == 'admin' )
             <a href="{{ Route('room.create') }}" class="btn-create">Создать зал</a>
@@ -45,19 +47,19 @@
         <div class="rooms">
             <h3>Залы</h3>
             @foreach ( $rooms as $room )
+            @if ( !Str::contains($room->name, 'удален') )
             <div class="room-card">
-                @if ( Str::contains($room->name, 'удален') )
-                <div class="room-info">
-                    <h4>{{ $room->name }}</h4>
-                </div>
-                @else
                 <a href="{{ Route('booking.room', $room->id) }}" class="room-link">
-                    <img src="{{ asset('rooms/' . $room->image) }}" alt="{{ $room->name }}" class="room-image">
+                    <img src="{{ asset('storage/rooms/' . $room->image) }}" alt="{{ $room->name }}" class="room-image">
                 </a>
                 <div class="room-info">
                     <a href="{{ Route('booking.room', $room->id) }}" class="room-link">{{ $room->name }}</a>
                     <p>{{ $room->description }}</p>
+                    @if ( Auth::user()->role == 'admin' )
+                    <a href="{{ Route('room.edit', $room->id) }}" class="btn-booking">Редактировать</a>
+                    @else
                     <a href="{{ Route('booking.room', $room->id) }}" class="btn-booking">Записаться</a>
+                    @endif
                 </div>
                 @auth
                 @if ( Auth::user()->role == 'admin' )
@@ -68,8 +70,8 @@
                 </form>
                 @endif
                 @endauth
-                @endif
             </div>
+            @endif
             @endforeach
         </div>
     </div>
