@@ -23,6 +23,11 @@ class RoomController extends Controller
         }
         $room = new Room();
         $room -> name = $request->name;
+        $room -> description = $request->description;
+        if($request->hasFile('image')){
+            $room -> image = time() . '.' . $request->file('image')->extension();
+            $request->file('image')->move(public_path('rooms'), $room->image);
+        }
         $room->save();
         // return back();
         return redirect()->route("dashboard");
@@ -31,7 +36,8 @@ class RoomController extends Controller
         if(Auth::user()->role !== "admin"){
             return redirect()->route("dashboard");
         }
-        $room->delete();
+        $room -> name = "зал удален";
+        $room->save();
         // return back();
         return redirect()->route("dashboard");
     }

@@ -10,7 +10,7 @@
 <div class="form-container">
 <h2>Создание зала</h2>
 
-<form action="{{ Route('room.store') }}" method="POST">
+<form action="{{ Route('room.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
 
 <label for="name">Название зала</label>
@@ -18,6 +18,19 @@
 @error('name')
 <div class="error-message">{{ $message }}</div>
 @enderror
+
+<label for="description">Описание</label>
+<textarea name="description" id="description" rows="4" placeholder="Введите описание зала">{{ old('description') }}</textarea>
+@error('description')
+<div class="error-message">{{ $message }}</div>
+@enderror
+
+<label for="image">Картинка</label>
+<input type="file" name="image" id="image">
+@error('image')
+<div class="error-message">{{ $message }}</div>
+@enderror
+
 <button type="submit">Создать зал</button>
 </form>
 

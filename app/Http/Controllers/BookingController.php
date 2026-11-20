@@ -14,6 +14,10 @@ class BookingController extends Controller
         $rooms = Room::all();
         return view("booking_create", compact("rooms"));
     }
+    public function booking_room($id){
+        $room = Room::find($id);
+        return view("booking_room", compact("room"));
+    }
     public function booking_addform(BookingRequest $request){
         $booking = new Booking();
         $booking -> user_id = Auth::user()->id;

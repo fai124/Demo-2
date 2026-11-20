@@ -9,7 +9,7 @@
 <body>
 <a href="{{ Route('dashboard') }}">
 <div class="header">
-<img class="photo" src="{{ asset('storage\imgbin-orange.jpg') }}" alt="1">
+<img class="photo" src="{{ asset('storage/imgbin-orange.jpg') }}" alt="1">
 <h1>Конференции.РФ</h1>
 <div>
 </a>
@@ -28,7 +28,7 @@
 <div class="booking-card">
 <div class="booking-info">
 <p><strong>Пользователь:</strong> {{ $booking->user->FIO }}</p>
-<p><strong>Зал:</strong> {{ $booking->room->name }}</p>
+<p><strong>Зал:</strong> @if ( Str::contains($booking->room->name, 'удален') ) зал удален @else {{ $booking->room->name }} @endif</p>
 <p><strong>Дата:</strong> {{ $booking->date }}</p>
 <p><strong>Оплата:</strong> {{ $booking->payment === 'cash' ? 'Очный платёж' : 'СБП' }}</p>
 <p><strong>Статус:</strong>
