@@ -8,20 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('room_id')->constrained()->onDelete('restrict');
+            $table->string('course_name');
             $table->date('date');
-            $table->enum('payment', ['cash', 'sbp']);
-            $table->enum('status', ['new', 'confirmed', 'completed'])->default('new');
-            $table->string('comment')->nullable();
+            $table->enum('payment', ['cash', 'phone']);
+            $table->enum('status', ['new', 'studying', 'completed'])->default('new');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('applications');
     }
 };

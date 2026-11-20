@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Room;
+use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index(){
-        $rooms = Room::all();
-        return view("dashboard", compact("rooms"));
+        $courses = Course::all();
+        return view("dashboard", compact("courses"));
     }
 }

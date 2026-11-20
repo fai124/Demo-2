@@ -16,13 +16,13 @@ class UserController extends Controller
     }
     public function register(UserRegisterRequest $request){
         $user = new User();
-        $user -> name = $request->login;
-        $user -> login = $request->login;
-        $user -> password = Hash::make($request->password);
-        $user -> FIO = $request->FIO;
-        $user -> number = $request->number;
-        $user -> email = $request->email;
-        $user -> role = 'user';
+        $user->name = $request->login;
+        $user->login = $request->login;
+        $user->password = Hash::make($request->password);
+        $user->FIO = $request->FIO;
+        $user->number = $request->number;
+        $user->email = $request->email;
+        $user->role = 'user';
         $user->save();
         Auth::login($user);
         return redirect()->route("dashboard");

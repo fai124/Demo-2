@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Booking extends Model
+class Application extends Model
 {
-    protected $fillable = ['user_id', 'room_id', 'date', 'payment', 'status', 'comment'];
-    
+    protected $fillable = ['user_id', 'course_name', 'date', 'payment', 'status', 'comment'];
+
     protected $casts = [
         'date' => 'date',
     ];
@@ -15,10 +15,5 @@ class Booking extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function room()
-    {
-        return $this->belongsTo(Room::class);
     }
 }

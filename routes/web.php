@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,16 +20,17 @@ Route::post('/logout', [UserController::class, 'logout'])->name("logout");
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name("dashboard");
 
-Route::get('/room/create', [RoomController::class, 'room_add'])->name("room.create")->middleware("auth");
-Route::post('/room/store', [RoomController::class, 'room_addform'])->name("room.store")->middleware("auth");
-Route::delete('/room/{room}', [RoomController::class, 'room_delete'])->name("room.delete")->middleware("auth");
-Route::get('/room/{room}/edit', [RoomController::class, 'room_edit'])->name("room.edit")->middleware("auth");
-Route::post('/room/{room}', [RoomController::class, 'room_editform'])->name("room.update")->middleware("auth");
+// Course routes (admin)
+Route::get('/course/create', [CourseController::class, 'course_add'])->name("course.create")->middleware("auth");
+Route::post('/course/store', [CourseController::class, 'course_addform'])->name("course.store")->middleware("auth");
+Route::delete('/course/{course}', [CourseController::class, 'course_delete'])->name("course.delete")->middleware("auth");
+Route::get('/course/{course}/edit', [CourseController::class, 'course_edit'])->name("course.edit")->middleware("auth");
+Route::post('/course/{course}', [CourseController::class, 'course_editform'])->name("course.update")->middleware("auth");
 
-Route::get('/booking/create', [BookingController::class, 'booking_add'])->name("booking.create")->middleware("auth");
-Route::get('/booking/room/{id}', [BookingController::class, 'booking_room'])->name("booking.room")->middleware("auth");
-Route::post('/booking/store', [BookingController::class, 'booking_addform'])->name("booking.store")->middleware("auth");
-Route::get('/booking/my', [BookingController::class, 'booking_list'])->name("booking.my")->middleware("auth");
-Route::get('/booking/admin', [BookingController::class, 'booking_admin'])->name("booking.admin")->middleware("auth");
-Route::post('/booking/{booking}/status', [BookingController::class, 'booking_update_status'])->name("booking.update_status")->middleware("auth");
-Route::post('/booking/{booking}/review', [BookingController::class, 'booking_review'])->name("booking.review")->middleware("auth");
+// Application routes
+Route::get('/application/create/{course_id?}', [ApplicationController::class, 'application_add'])->name("application.create")->middleware("auth");
+Route::post('/application/store', [ApplicationController::class, 'application_addform'])->name("application.store")->middleware("auth");
+Route::get('/application/my', [ApplicationController::class, 'application_list'])->name("application.my")->middleware("auth");
+Route::get('/application/admin', [ApplicationController::class, 'application_admin'])->name("application.admin")->middleware("auth");
+Route::post('/application/{application}/status', [ApplicationController::class, 'application_update_status'])->name("application.update_status")->middleware("auth");
+Route::post('/application/{application}/review', [ApplicationController::class, 'application_review'])->name("application.review")->middleware("auth");
