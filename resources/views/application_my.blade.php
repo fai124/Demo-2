@@ -10,7 +10,6 @@
     <header class="header">
         <div class="header-left">
             <h1 class="logo">Корочки.есть</h1>
-            <span class="subtitle">Портал дополнительного профессионального образования</span>
         </div>
         <div class="header-right">
             <span class="user-name">{{ Auth::user()->FIO }}</span>
@@ -50,12 +49,6 @@
             </div>
             @endif
         </div>
-        @empty
-        <div class="empty-state">
-            <p>У вас пока нет заявок. <a href="{{ Route('application_create') }}">Подать заявку</a></p>
-        </div>
-        @endforelse
-
         <p class="link"><a href="{{ Route('dashboard') }}">На главную</a></p>
     </main>
 </body>

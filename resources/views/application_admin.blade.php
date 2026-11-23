@@ -47,11 +47,6 @@
                 <button type="submit" class="btn-submit">Изменить статус</button>
             </form>
         </div>
-        @empty
-        <div class="empty-state">
-            <p>Заявок пока нет.</p>
-        </div>
-        @endforelse
 
         <!-- Pagination -->
         @if ($applications->hasPages())

@@ -14,6 +14,7 @@ class UserController extends Controller
     public function registerForm(){
         return view("register");
     }
+
     public function register(UserRegisterRequest $request){
         $user = new User();
         $user->name = $request->login;
@@ -27,17 +28,22 @@ class UserController extends Controller
         Auth::login($user);
         return redirect()->route("dashboard");
     }
+
     public function loginForm(){
         return view("login");
     }
+
     public function login(UserLoginRequest $request){
         $user = User::where("login", $request->login)->first();
+
         if($user && Hash::check($request->password, $user->password)){
             Auth::login($user);
             return redirect()->route("dashboard");
         }
+
         return back()->withErrors(["login" => "Неверный логин или пароль"])->withInput();
     }
+
     public function logout(Request $request){
         Auth::logout();
         return redirect()->route("login");
