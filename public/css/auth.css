@@ -29,6 +29,11 @@ body {
     color: #333;
 }
 
+.auth-header a {
+    color: #333;
+    text-decoration: none;
+}
+
 .form-container {
     background: #fff;
     padding: 30px;

@@ -13,5 +13,6 @@ class ApplicationRequest extends FormRequest
             'date' => 'required|date|after_or_equal:today',
             'payment' => 'required',
         ];
+
     }
 }

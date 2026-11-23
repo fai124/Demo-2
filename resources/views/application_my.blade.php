@@ -31,23 +31,15 @@
             <div class="application-info">
                 <h4>{{ $application->course_name }}</h4>
                 <p><strong>Дата начала:</strong> {{ $application->date->format('d.m.Y') }}</p>
-                <p><strong>Оплата:</strong> {{ $application->payment === 'cash' ? 'Наличными' : 'Перевод по номеру телефона' }}</p>
-                <p><strong>Статус:</strong>
-                    @if ($application->status == 'new')
-                    <span class="status-badge status-new">Новая</span>
-                    @elseif ($application->status == 'studying')
-                    <span class="status-badge status-studying">Идет обучение</span>
-                    @elseif ($application->status == 'completed')
-                    <span class="status-badge status-completed">Обучение завершено</span>
-                    @endif
-                </p>
+                <p><strong>Оплата:</strong> {{ $application->payment }}</p>
+                <p><strong>Статус:</strong> {{ $application->status }}</p>
             </div>
 
             @if ($application->status == 'completed' && !$application->comment)
-            <form action="{{ Route('application.review', $application) }}" method="POST" class="review-form">
+            <form action="{{ Route('application_review', $application) }}" method="POST">
                 @csrf
-                <textarea name="comment" placeholder="Оставьте отзыв о качестве образовательных услуг..." rows="3"></textarea>
-                <button type="submit" class="btn-submit">Отправить отзыв</button>
+                <textarea name="comment" rows="2" placeholder="Отзыв..."></textarea>
+                <button type="submit" class="btn-submit">Отправить</button>
             </form>
             @endif
 
@@ -60,7 +52,7 @@
         </div>
         @empty
         <div class="empty-state">
-            <p>У вас пока нет заявок. <a href="{{ Route('application.create') }}">Подать заявку</a></p>
+            <p>У вас пока нет заявок. <a href="{{ Route('application_create') }}">Подать заявку</a></p>
         </div>
         @endforelse
 

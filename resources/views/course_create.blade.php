@@ -15,7 +15,7 @@
         <div class="form-container">
             <h2>Создание курса</h2>
 
-            <form action="{{ Route('course.store') }}" method="POST">
+            <form action="{{ Route('course_store') }}" method="POST">
                 @csrf
 
                 <label for="name">Название курса</label>

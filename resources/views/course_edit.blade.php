@@ -15,7 +15,7 @@
         <div class="form-container">
             <h2>Редактирование курса</h2>
 
-            <form action="{{ Route('course.update', $course) }}" method="POST">
+            <form action="{{ Route('course_update', $course) }}" method="POST">
                 @csrf
 
                 <label for="name">Название курса</label>

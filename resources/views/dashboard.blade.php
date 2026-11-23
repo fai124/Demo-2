@@ -78,14 +78,14 @@
 
             @if (Auth::user()->role !== 'admin')
             <div class="action-buttons">
-                <a href="{{ Route('application.my') }}" class="btn-action">Мои заявки</a>
+                <a href="{{ Route('application_list') }}" class="btn-action">Мои заявки</a>
             </div>
             @endif
 
             @if (Auth::user()->role == 'admin')
             <div class="action-buttons">
-                <a href="{{ Route('course.create') }}" class="btn-action">Создать курс</a>
-                <a href="{{ Route('application.admin') }}" class="btn-action">Панель администратора</a>
+                <a href="{{ Route('course_create') }}" class="btn-action">Создать курс</a>
+                <a href="{{ Route('application_admin') }}" class="btn-action">Панель администратора</a>
             </div>
             @endif
             @endauth
@@ -99,18 +99,18 @@
                     <h4>{{ $course->name }}</h4>
                     <p>{{ Str::limit($course->description, 100) }}</p>
                     @if (Auth::check() && Auth::user()->role == 'admin')
-                    <a href="{{ Route('course.edit', $course->id) }}" class="btn-edit">Редактировать</a>
+                    <a href="{{ Route('course_edit', $course->id) }}" class="btn-edit">Редактировать</a>
                     @endif
                 </div>
                 @auth
                 @if (Auth::user()->role == 'admin')
-                <form action="{{ Route('course.delete', $course) }}" method="POST" class="form-inline">
+                <form action="{{ Route('course_delete', $course) }}" method="POST" class="form-inline">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn-delete">Удалить</button>
                 </form>
                 @else
-                <a href="{{ Route('application.create', $course->id) }}" class="btn-action">Записаться</a>
+                <a href="{{ Route('application_create', $course->id) }}" class="btn-action">Записаться</a>
                 @endif
                 @endauth
             </div>

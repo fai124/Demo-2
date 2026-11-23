@@ -9,8 +9,9 @@
 <body class="auth-page">
     <div class="auth-container">
         <div class="auth-header">
-            <h1>Корочки.есть</h1>
-            <p>Портал дополнительного профессионального образования</p>
+            <a href="{{ Route('dashboard') }}">
+                <h1>Корочки.есть</h1>
+            </a>
         </div>
 
         <div class="form-container">

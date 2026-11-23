@@ -15,7 +15,7 @@
         <div class="form-container">
             <h2>Создание заявки</h2>
 
-            <form action="{{ Route('application.store') }}" method="POST">
+            <form action="{{ Route('application_store') }}" method="POST">
                 @csrf
 
                 <input type="hidden" name="course_name" value="{{ $course_name }}">

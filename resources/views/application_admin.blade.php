@@ -26,36 +26,18 @@
             <h2>Управление заявками</h2>
         </div>
 
-        <!-- Filter -->
-        <div class="admin-filters">
-            <select id="filterStatus" onchange="filterApplications()">
-                <option value="all">Все статусы</option>
-                <option value="new">Новые</option>
-                <option value="studying">Идет обучение</option>
-                <option value="completed">Обучение завершено</option>
-            </select>
-        </div>
-
         @forelse ($applications as $application)
-        <div class="application-card admin-card" data-status="{{ $application->status }}">
+        <div class="application-card">
             <div class="application-info">
                 <p><strong>Пользователь:</strong> {{ $application->user->FIO }}</p>
                 <p><strong>Логин:</strong> {{ $application->user->login }}</p>
                 <p><strong>Курс:</strong> {{ $application->course_name }}</p>
                 <p><strong>Дата начала:</strong> {{ $application->date->format('d.m.Y') }}</p>
-                <p><strong>Оплата:</strong> {{ $application->payment === 'cash' ? 'Наличными' : 'Перевод по номеру телефона' }}</p>
-                <p><strong>Статус:</strong>
-                    @if ($application->status == 'new')
-                    <span class="status-badge status-new">Новая</span>
-                    @elseif ($application->status == 'studying')
-                    <span class="status-badge status-studying">Идет обучение</span>
-                    @elseif ($application->status == 'completed')
-                    <span class="status-badge status-completed">Обучение завершено</span>
-                    @endif
-                </p>
+                <p><strong>Оплата:</strong> {{ $application->payment }}</p>
+                <p><strong>Статус:</strong> {{ $application->status }}</p>
             </div>
 
-            <form action="{{ Route('application.update_status', $application) }}" method="POST" class="form-inline">
+            <form action="{{ Route('application_update_status', $application) }}" method="POST" class="form-inline">
                 @csrf
                 <select name="status" class="status-select">
                     <option value="new" @if ($application->status == 'new') selected @endif>Новая</option>
@@ -81,23 +63,6 @@
         <p class="link"><a href="{{ Route('dashboard') }}">На главную</a></p>
     </main>
 
-    <script>
-        function filterApplications() {
-            const filter = document.getElementById('filterStatus').value;
-            const cards = document.querySelectorAll('.admin-card');
-            cards.forEach(card => {
-                if (filter === 'all' || card.dataset.status === filter) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
 
-        // Show notification on status change
-        @if (session('status_changed'))
-        alert('Статус заявки успешно изменен!');
-        @endif
-    </script>
 </body>
 </html>
