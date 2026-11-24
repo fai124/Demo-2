@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\AppController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -27,10 +27,10 @@ Route::delete('/course/{course}', [CourseController::class, 'course_delete'])->n
 Route::get('/course/{course}/edit', [CourseController::class, 'course_edit'])->name("course_edit")->middleware("auth");
 Route::post('/course/{course}', [CourseController::class, 'course_editform'])->name("course_update")->middleware("auth");
 
-// Application routes
-Route::get('/application/create/{course_id?}', [ApplicationController::class, 'application_add'])->name("application_create")->middleware("auth");
-Route::post('/application/store', [ApplicationController::class, 'application_addform'])->name("application_store")->middleware("auth");
-Route::get('/application/my', [ApplicationController::class, 'application_list'])->name("application_list")->middleware("auth");
-Route::get('/application/admin', [ApplicationController::class, 'application_admin'])->name("application_admin")->middleware("auth");
-Route::post('/application/{application}/status', [ApplicationController::class, 'application_update_status'])->name("application_update_status")->middleware("auth");
-Route::post('/application/{application}/review', [ApplicationController::class, 'application_review'])->name("application_review")->middleware("auth");
+// App routes
+Route::get('/application/create/{course_id?}', [AppController::class, 'application_add'])->name("application_create")->middleware("auth");
+Route::post('/application/store', [AppController::class, 'application_addform'])->name("application_store")->middleware("auth");
+Route::get('/application/my', [AppController::class, 'application_list'])->name("application_list")->middleware("auth");
+Route::get('/application/admin', [AppController::class, 'application_admin'])->name("application_admin")->middleware("auth");
+Route::post('/application/{application}/status', [AppController::class, 'application_update_status'])->name("application_update_status")->middleware("auth");
+Route::post('/application/{application}/review', [AppController::class, 'application_review'])->name("application_review")->middleware("auth");
